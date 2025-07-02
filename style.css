@@ -127,4 +127,31 @@ main {
 }
 
 .categoria-altura {
-  b
+  background-color: #e3f2fd;
+
+  header.topo {
+  background-color: #002244;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header.topo .logo {
+  height: 50px;
+  object-fit: contain;
+}
+
+header.topo .snipcart-checkout {
+  background-color: #ffcc00;
+  color: #002244;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
