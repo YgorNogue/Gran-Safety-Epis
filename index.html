@@ -4,147 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gran Safety EPIs</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      background-color: #112557;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-    }
-
-    header img {
-      height: 80px;
-      margin-right: 20px;
-    }
-
-    header div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    header p {
-      margin: 5px 0 0;
-      font-size: 14px;
-    }
-
-    nav {
-      background-color: #00579d;
-      padding: 10px;
-      text-align: center;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease, text-decoration 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #ffcc00;
-      text-decoration: underline;
-    }
-
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .section h2 {
-      color: #00579d;
-    }
-
-    .produtos, .ebooks {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 200px;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .card:hover p {
-      color: #00579d;
-    }
-
-    .card img {
-      width: 100%;
-      height: 150px;
-      object-fit: contain;
-    }
-
-    .card p {
-      font-weight: bold;
-      margin: 10px 0;
-      text-decoration: none;
-    }
-
-    .price {
-      color: #00579d;
-      font-weight: bold;
-    }
-
-    footer {
-      background: #112557;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <img src="banner.jpg" alt="Logo Gran Safety">
-    <div>
-      <h1>Gran Safety EPIs</h1>
-      <p>Distribuidora de Equipamentos de Proteção Individual</p>
-    </div>
-  </header>
-
-  <nav>
-    <a href="index.html">Início</a>
-    <a href="cabeca.html">Cabeça</a>
-    <a href="auditiva.html">Proteção Auditiva</a>
-    <a href="oculos.html">Óculos</a>
-    <a href="respiratoria.html">Respiratória</a>
-    <a href="luvas.html">Luvas</a>
-    <a href="calcados.html">Calçados</a>
-    <a href="altura.html">Altura</a>
-    <a href="#ebooks">E-books</a>
-    <a href="#contato">Contato</a>
-  </nav>
+  <div id="header"></div>
 
   <section class="section" id="produtos">
     <h2>Nossos EPIs</h2>
@@ -213,9 +77,16 @@
     <p>Instagram: @gransafetyepis</p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Gran Safety EPIs. Todos os direitos reservados.</p>
-  </footer>
+  <div id="footer"></div>
 
+  <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('header').innerHTML = data);
+
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer').innerHTML = data);
+  </script>
 </body>
 </html>
