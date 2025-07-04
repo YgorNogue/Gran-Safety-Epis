@@ -1,29 +1,35 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gran Safety EPIs</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; color: #333;}
-    header { background-color: #00579d; color: white; padding: 20px; text-align: center;}
-    nav { background-color: #003f73; padding: 10px; text-align: center;}
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold;}
-    .banner { background: url('https://via.placeholder.com/1200x400?text=Gran+Safety+EPIs') center/cover no-repeat; height: 300px;}
-    .section { padding: 40px 20px; text-align: center;}
-    .section h2 { color: #00579d;}
-    .produtos, .ebooks { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px;}
-    .card { background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; width: 200px;}
-    .card img { width: 100%; height: 150px; object-fit: contain;}
-    .card p { font-weight: bold; margin: 10px 0;}
-    .price { color: #00579d;}
-    footer { background: #003f73; color: white; text-align: center; padding: 20px; margin-top: 40px;}
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header { background-color: #00579d; color: white; padding: 20px; display: flex; align-items: center; }
+    header img { height: 80px; margin-right: 20px; }
+    header h1 { margin: 0; font-size: 28px; }
+    header p { margin: 0; font-size: 14px; margin-top: 4px; }
+    nav { background-color: #003f73; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    .banner { background: url('banner.jpg') left center no-repeat; background-size: contain; height: 150px; margin: 0; }
+    .section { padding: 40px 20px; text-align: center; }
+    .section h2 { color: #00579d; }
+    .produtos, .ebooks { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+    .card { background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; width: 200px; }
+    .card img { width: 100%; height: 150px; object-fit: contain; }
+    .card p { font-weight: bold; margin: 10px 0; }
+    .price { color: #00579d; }
+    footer { background: #003f73; color: white; text-align: center; padding: 20px; margin-top: 40px; }
   </style>
 </head>
 <body>
 <header>
-  <h1>Gran Safety EPIs</h1>
-  <p>Distribuidora de Equipamentos de Proteção Individual</p>
+  <img src="banner.jpg" alt="Logo Gran Safety">
+  <div>
+    <h1>Gran Safety EPIs</h1>
+    <p>Distribuidora de Equipamentos de Proteção Individual</p>
+  </div>
 </header>
 <nav>
   <a href="index.html">Início</a>
@@ -44,7 +50,6 @@
     <a href="cabeca.html" class="card">
       <img src="https://down-br.img.susercontent.com/file/1fa8531ef878afefc703bace4cf2f8a5.webp" alt="Capacete de segurança">
        <div class="categoria-overlay">
-    <h2>CABEÇA</h2>
     <p>Proteção para a cabeça</p>
   </div>
     </a>
@@ -55,7 +60,6 @@
     <a href="luvas.html" class="card">
       <img src="https://down-br.img.susercontent.com/file/6ef07557e00cfbc1268fafb8f3a8333e.webp" alt="Luvas de proteção">
       <p>Luvas de Proteção</p>
-      <span class="price">Thales Viadão</span>
     </a>
     <a href="respiratoria.html" class="card">
       <img src="https://down-br.img.susercontent.com/file/0a6869973dbaa573130651464a35943c.webp" alt="Máscara respiratória">
