@@ -21,7 +21,7 @@
     }
 
     header img {
-      height: 120px;
+      height: 80px;
       margin-right: 20px;
     }
 
@@ -72,12 +72,21 @@
     }
 
     .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 200px;
-    }
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 200px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .card:hover {
+  color: #00579d;
+  transform: translateY(-5px); /* levanta */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* sombra mais forte */
+}
 
     .card img {
       width: 100%;
@@ -85,10 +94,11 @@
       object-fit: contain;
     }
 
-    .card p {
-      font-weight: bold;
-      margin: 10px 0;
-    }
+ .card p {
+  font-weight: bold;
+  margin: 10px 0;
+  text-decoration: none;
+}
 
     .price {
       color: #00579d;
@@ -131,7 +141,7 @@
     <div class="produtos">
       <a href="cabeca.html" class="card">
         <img src="https://down-br.img.susercontent.com/file/1fa8531ef878afefc703bace4cf2f8a5.webp" alt="Capacete de segurança">
-        <p>CABEÇA</p>
+        <p>Capacetes</p></p>
       </a>
       <a href="auditiva.html" class="card">
         <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98r-llz1is4de31y07.webp" alt="Protetor Auricular">
