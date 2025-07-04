@@ -14,10 +14,12 @@ header {
 }
 
 header img {
-  max-height: 120px;
-  height: auto;
+  height: 100px;
   width: auto;
+  margin-right: 20px;
+  object-fit: contain;
 }
+
 
 header div {
   display: flex;
