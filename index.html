@@ -52,6 +52,12 @@
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffcc00;
+      text-decoration: underline;
     }
 
     .section {
@@ -72,21 +78,24 @@
     }
 
     .card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  padding: 20px;
-  width: 200px;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 200px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
     .card:hover {
-  color: #00579d;
-  transform: translateY(-5px); /* levanta */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* sombra mais forte */
-}
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover p {
+      color: #00579d;
+    }
 
     .card img {
       width: 100%;
@@ -94,14 +103,15 @@
       object-fit: contain;
     }
 
- .card p {
-  font-weight: bold;
-  margin: 10px 0;
-  text-decoration: none;
-}
+    .card p {
+      font-weight: bold;
+      margin: 10px 0;
+      text-decoration: none;
+    }
 
     .price {
       color: #00579d;
+      font-weight: bold;
     }
 
     footer {
@@ -141,7 +151,7 @@
     <div class="produtos">
       <a href="cabeca.html" class="card">
         <img src="https://down-br.img.susercontent.com/file/1fa8531ef878afefc703bace4cf2f8a5.webp" alt="Capacete de segurança">
-        <p>Capacetes</p></p>
+        <p>Capacetes</p>
       </a>
       <a href="auditiva.html" class="card">
         <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98r-llz1is4de31y07.webp" alt="Protetor Auricular">
@@ -205,10 +215,6 @@
 
   <footer>
     <p>&copy; 2025 Gran Safety EPIs. Todos os direitos reservados.</p>
-  </footer>
-
-</body>
-</html>
   </footer>
 
 </body>
