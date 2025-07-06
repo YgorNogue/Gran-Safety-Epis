@@ -13,35 +13,38 @@
   <section class="section" id="produtos">
     <h2>Nossos EPIs</h2>
     <div class="produtos">
-      <a href="cabeca.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Capacete de Segurança', 150)">
         <img src="https://down-br.img.susercontent.com/file/1fa8531ef878afefc703bace4cf2f8a5.webp" alt="Capacete de segurança">
         <p>Capacetes</p>
       </a>
-      <a href="auditiva.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Protetor Auricular', 40)">
         <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98r-llz1is4de31y07.webp" alt="Protetor Auricular">
         <p>Protetor Auricular</p>
       </a>
-      <a href="luvas.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Luvas de Proteção', 25)">
         <img src="https://down-br.img.susercontent.com/file/6ef07557e00cfbc1268fafb8f3a8333e.webp" alt="Luvas de proteção">
         <p>Luvas de Proteção</p>
       </a>
-      <a href="respiratoria.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Máscara Respiratória', 60)">
         <img src="https://down-br.img.susercontent.com/file/0a6869973dbaa573130651464a35943c.webp" alt="Máscara respiratória">
         <p>Máscara Respiratória</p>
       </a>
-      <a href="oculos.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Óculos de Proteção', 30)">
         <img src="https://down-br.img.susercontent.com/file/0d90b41a4ee854b8e3b68a82713a941c.webp" alt="Óculos de proteção">
         <p>Óculos de Proteção</p>
       </a>
-      <a href="calcados.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Calçados de Segurança', 120)">
         <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-m3w6g6gwk1y37b.webp" alt="Calçados de segurança">
         <p>Calçados de Segurança</p>
       </a>
-      <a href="altura.html" class="card">
+      <a href="#" class="card" onclick="adicionarAoCarrinho('Trabalho em Altura', 90)">
         <img src="https://down-br.img.susercontent.com/file/sg-11134201-22100-q8rn1qfcptiv96.webp" alt="Proteção para trabalho em altura">
         <p>Trabalho em Altura</p>
       </a>
     </div>
+
+    <!-- Botão de acesso ao carrinho -->
+    <a href="checkout.html" class="btn-carrinho">🛒 Ver Carrinho</a>
   </section>
 
   <section class="section" id="ebooks">
@@ -53,12 +56,12 @@
         <span class="price">GRÁTIS</span>
       </div>
       <div class="card">
-        <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-193c-61f7-a785-1fca6084f24f/raw?se=2025-07-04T19%3A49%3A49Z&sp=r&sv=2024-08-04&sr=b&scid=2fbd4d8f-7419-5a95-8cbf-a5e894ed46b8&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-04T13%3A11%3A28Z&ske=2025-07-05T13%3A11%3A28Z&sks=b&skv=2024-08-04&sig=ywDyIJKEDoZ%2BE9/SibJz2laFAEUJThmwzRyBme/gyy8%3D" alt="Segurança no Trabalho">
+        <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-193c-61f7-a785-1fca6084f24f/raw?..." alt="Segurança no Trabalho">
         <p>Segurança no Trabalho</p>
         <span class="price">GRÁTIS</span>
       </div>
       <div class="card">
-        <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-eff8-61f7-80a6-8fec44c74d09/raw?se=2025-07-04T18%3A47%3A43Z&sp=r&sv=2024-08-04&sr=b&scid=ebbe23ef-602a-5731-8e9a-2ed5c6c7b9c9&skoid=9ccea605-1409-4478-82eb-9c83b25dc1b0&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-04T14%3A11%3A46Z&ske=2025-07-05T14%3A11%3A46Z&sks=b&skv=2024-08-04&sig=YED24dsP%2BX9z4bBXl%2BW6gr9yjxhIpPg1axrIgLssF6A%3D" alt="Prevenção de Acidentes">
+        <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-eff8-61f7-80a6-8fec44c74d09/raw?..." alt="Prevenção de Acidentes">
         <p>Prevenção de Acidentes</p>
         <span class="price">GRÁTIS</span>
       </div>
@@ -81,5 +84,7 @@
       .then(res => res.text())
       .then(data => document.getElementById('footer').innerHTML = data);
   </script>
+
+  <script src="carrinho.js"></script>
 </body>
 </html>
