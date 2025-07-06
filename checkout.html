@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Seu Carrinho</h1>
+  <div id="lista-produtos"></div>
+  <p id="total"></p>
+  <button onclick="limparCarrinho()">🗑 Limpar Carrinho</button>
+  <a href="index.html">← Voltar</a>
+
+  <script>
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const lista = document.getElementById('lista-produtos');
+    let total = 0;
+
+    carrinho.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.innerHTML = `${index + 1}. ${item.nome} - R$ ${item.preco}`;
+      lista.appendChild(div);
+      total += item.preco;
+    });
+
+    document.getElementById('total').innerHTML = `<strong>Total: R$ ${total}</strong>`;
+
+    function limparCarrinho() {
+      localStorage.removeItem('carrinho');
+      location.reload();
+    }
+  </script>
+</body>
+</html>
