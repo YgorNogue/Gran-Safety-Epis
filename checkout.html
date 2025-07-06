@@ -98,9 +98,9 @@
       margin-bottom: 8px;
       cursor: pointer;
       font-size: 1em;
+      gap: 8px;
     }
     .service-options input[type="radio"] {
-      margin-right: 8px;
       accent-color: #FF6600;
     }
     .resume-title {
@@ -178,6 +178,8 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
+
   <div class="checkout-container">
     <!-- Main Section -->
     <div class="main-section">
@@ -216,12 +218,12 @@
           </label>
           <label>
             <input type="radio" name="garantia"> 12 Meses de Garantia Estendida Kabum
-            <span title="Informação" style="margin-left:4px; color:#FF6600; cursor:pointer;">&#9432;</span>
+            <span title="Informação" style="color:#FF6600; cursor:pointer;">&#9432;</span>
             <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros de R$ 38,92</span>
           </label>
           <label>
             <input type="radio" name="garantia"> 24 Meses de Garantia Estendida Kabum
-            <span title="Informação" style="margin-left:4px; color:#FF6600; cursor:pointer;">&#9432;</span>
+            <span title="Informação" style="color:#FF6600; cursor:pointer;">&#9432;</span>
             <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros de R$ 49,23</span>
           </label>
         </div>
@@ -254,5 +256,17 @@
       <button class="back-btn">VOLTAR</button>
     </div>
   </div>
+
+  <div id="footer"></div>
+
+  <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('header').innerHTML = data);
+
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer').innerHTML = data);
+  </script>
 </body>
 </html>
