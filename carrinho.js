@@ -1,6 +1,10 @@
-function adicionarAoCarrinho(nome, preco) {
+function atualizarBadge() {
   const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-  carrinho.push({ nome, preco });
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert(`${nome} adicionado ao carrinho!`);
+  const badge = document.getElementById('badgeCarrinho');
+  if (badge) {
+    badge.textContent = carrinho.length > 0 ? carrinho.length : '';
+  }
 }
+
+// Atualiza no carregamento da página
+window.onload = atualizarBadge;
