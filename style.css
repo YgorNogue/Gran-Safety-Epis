@@ -12,11 +12,11 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  min-height: 48px;
+  min-height: 64px;
 }
 
 header img {
-  max-height: 48px;
+  max-height: 64px;
   width: auto;
 }
 
