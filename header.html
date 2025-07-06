@@ -1,6 +1,84 @@
+<style>
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .logo-link {
+    display: inline-block;
+    cursor: pointer;
+  }
+  .logo-link img {
+    height: 56px;
+    display: block;
+    cursor: pointer;
+  }
+  .btn-carrinho-topo {
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    margin-left: 16px;
+    cursor: pointer;
+  }
+  .badge-carrinho {
+    position: absolute;
+    top: -6px;
+    right: -12px;
+    background: #FFD600;
+    color: #112557;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 0.85em;
+    border: 2px solid #fff;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    background: #112557;
+    padding: 10px 0;
+  }
+  nav a {
+    color: #FFD600;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  nav a:hover {
+    background: #FFD600;
+    color: #112557;
+  }
+  @media (max-width: 700px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 24px;
+    }
+  }
+</style>
+
 <header>
-  <a href="index.html" style="cursor:pointer;display:inline-block;">
-    <img src="banner.png" alt="Logo Gran Safety" style="cursor:pointer;display:block;">
+  <a href="index.html" class="logo-link">
+    <img src="banner.png" alt="Logo Gran Safety">
+  </a>
+  <a href="checkout.html" class="btn-carrinho-topo" title="Ver Carrinho">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24">
+      <path fill="#112557" d="M7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7.16 17H19a1 1 0 0 0 .98-.8l2-10A1 1 0 0 0 21 5H6.21l-.34-1.36A2 2 0 0 0 4 2H2a1 1 0 1 0 0 2h2l3.6 14.59a2 2 0 0 0 1.94 1.41H19a1 1 0 1 0 0-2H8.42a.5.5 0 0 1-.48-.36L7.16 17ZM6.16 7h13.17l-1.6 8H7.72L6.16 7Z"/>
+    </svg>
+    <span class="badge-carrinho" id="badgeCarrinho">0</span>
   </a>
 </header>
 
@@ -15,13 +93,3 @@
   <a href="altura.html">Proteção para Altura</a>
   <a href="/Gran-Safety-Epis/index.html#contato">Contato</a>
 </nav>
-
-<div id="header" class="header">
-  <!-- Outros elementos do header aqui -->
-  <a href="checkout.html" class="btn-carrinho-topo" title="Ver Carrinho" style="cursor:pointer;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24">
-      <path fill="#112557" d="M7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7.16 17H19a1 1 0 0 0 .98-.8l2-10A1 1 0 0 0 21 5H6.21l-.34-1.36A2 2 0 0 0 4 2H2a1 1 0 1 0 0 2h2l3.6 14.59a2 2 0 0 0 1.94 1.41H19a1 1 0 1 0 0-2H8.42a.5.5 0 0 1-.48-.36L7.16 17ZM6.16 7h13.17l-1.6 8H7.72L6.16 7Z"/>
-    </svg>
-    <span class="badge-carrinho" id="badgeCarrinho">0</span>
-  </a>
-</div>
