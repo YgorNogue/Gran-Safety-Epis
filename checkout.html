@@ -6,11 +6,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="header"></div>
+
   <h1>Seu Carrinho</h1>
   <div id="lista-produtos"></div>
   <p id="total"></p>
   <button onclick="limparCarrinho()">🗑 Limpar Carrinho</button>
   <a href="index.html">← Voltar</a>
+
+  <div id="footer"></div>
 
   <script>
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -32,7 +36,7 @@
     }
   </script>
 
-   <script>
+  <script>
     fetch('header.html')
       .then(res => res.text())
       .then(data => document.getElementById('header').innerHTML = data);
