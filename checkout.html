@@ -45,9 +45,13 @@
       gap: 24px;
       align-items: flex-start;
       margin-bottom: 24px;
+      border-bottom: 1px solid #ececec;
+      padding-bottom: 16px;
     }
     .product-image {
       width: 100px;
+      height: 100px;
+      object-fit: contain;
       border-radius: 6px;
       background: #eee;
     }
@@ -172,6 +176,12 @@
       background: #E53935;
       color: #fff;
     }
+    .empty-cart {
+      color: #888;
+      font-size: 1.15em;
+      text-align: center;
+      margin: 48px 0;
+    }
     @media (max-width: 900px) {
       .checkout-container { flex-direction: column; }
     }
@@ -185,29 +195,10 @@
     <div class="main-section">
       <div class="section-title">
         <span>🛒</span> PRODUTO E SERVIÇO
-        <button class="remove-all-btn">REMOVER TODOS OS PRODUTOS</button>
+        <button class="remove-all-btn" id="btn-limpar">REMOVER TODOS OS PRODUTOS</button>
       </div>
-      <div class="product-item">
-        <img src="https://images.kabum.com.br/produtos/fotos/console-ps5.jpg" alt="Produto" class="product-image">
-        <div class="product-details">
-          <span style="font-size:0.96em;color:#888">Sony</span>
-          <div class="product-title">
-            Console PlayStation 5 Slim Sony, SSD 1TB, Edição Digital, Com Controle Sem Fio DualSense, Branco + 2 Jogos Digitais – ...
-          </div>
-          <span style="font-size:0.95em;color:#666">
-            Com desconto no PIX: <b>R$ 3.719,07</b><br>
-            Parcelado no cartão sem juros: <b>R$ 3.999,00</b>
-          </span>
-          <button class="remove-btn">REMOVER</button>
-        </div>
-        <div style="text-align:center; min-width:120px;">
-          <div style="font-size:0.95em;color:#888;">Quant.</div>
-          <div style="font-size:1.3em;font-weight:bold;">1</div>
-          <div style="font-size:0.95em;color:#888;">Preço à vista no PIX:</div>
-          <div style="font-size:1.15em;color:#FF6600;font-weight:bold;">R$ 3.719,07</div>
-        </div>
-      </div>
-      <div class="services-section">
+      <div id="produtos-lista"></div>
+      <div class="services-section" id="services-section" style="display:none;">
         <div class="services-title">
           <span>🛡️</span> SERVIÇOS
         </div>
@@ -217,14 +208,14 @@
             <input type="radio" name="garantia" checked> Sem garantia
           </label>
           <label>
-            <input type="radio" name="garantia"> 12 Meses de Garantia Estendida Kabum
+            <input type="radio" name="garantia"> 12 Meses de Garantia Estendida
             <span title="Informação" style="color:#FF6600; cursor:pointer;">&#9432;</span>
-            <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros de R$ 38,92</span>
+            <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros</span>
           </label>
           <label>
-            <input type="radio" name="garantia"> 24 Meses de Garantia Estendida Kabum
+            <input type="radio" name="garantia"> 24 Meses de Garantia Estendida
             <span title="Informação" style="color:#FF6600; cursor:pointer;">&#9432;</span>
-            <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros de R$ 49,23</span>
+            <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros</span>
           </label>
         </div>
         <div style="font-size:0.95em;color:#888; margin-top:6px;">
@@ -239,27 +230,29 @@
       <div class="resume-title"><span>📄</span> RESUMO</div>
       <div class="row">
         <span>Valor dos Produtos:</span>
-        <span style="font-weight:bold;">R$ 3.999,00</span>
+        <span id="valorProdutos">R$ 0,00</span>
       </div>
       <div class="row" style="color:#555;">
         <span>Total a prazo:</span>
-        <span style="font-weight:bold;">R$ 3.999,00</span>
+        <span id="totalPrazo">R$ 0,00</span>
       </div>
-      <div style="color:#888; font-size:0.95em; margin-bottom:12px;">
-        (em até <b>10x</b> de <b>R$ 399,90</b> sem juros)
+      <div style="color:#888; font-size:0.95em; margin-bottom:12px;" id="parcelasRow">
+        (em até <b>10x</b> de <b>R$ 0,00</b> sem juros)
       </div>
-      <div class="highlight">
+      <div class="highlight" id="pixBox" style="display:none;">
         Valor à vista no <span style="color:#00821E;"><b>PIX:</b></span>
-        <span style="font-size:1.1em;">R$ 3.719,07 <span style="font-size:0.9em; color:#00821E;">(Economize: R$ 279,93)</span></span>
+        <span style="font-size:1.1em;" id="valorPix">R$ 0,00</span>
+        <span style="font-size:0.9em; color:#00821E;" id="economize">(Economize: R$ 0,00)</span>
       </div>
       <button class="continue-btn">CONTINUAR</button>
-      <button class="back-btn">VOLTAR</button>
+      <button class="back-btn" onclick="window.location='index.html'">VOLTAR</button>
     </div>
   </div>
 
   <div id="footer"></div>
 
   <script>
+    // Header e footer dinâmicos
     fetch('header.html')
       .then(res => res.text())
       .then(data => document.getElementById('header').innerHTML = data);
@@ -267,6 +260,95 @@
     fetch('footer.html')
       .then(res => res.text())
       .then(data => document.getElementById('footer').innerHTML = data);
+
+    // Exemplo: o carrinho deve ser um array de objetos { nome, preco, imagem (opcional) }
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const lista = document.getElementById('produtos-lista');
+    const btnLimpar = document.getElementById('btn-limpar');
+    const servicesSection = document.getElementById('services-section');
+
+    let total = 0;
+
+    function renderCarrinho() {
+      lista.innerHTML = '';
+      total = 0;
+
+      if (carrinho.length === 0) {
+        lista.innerHTML = `<div class="empty-cart">Seu carrinho está vazio.</div>`;
+        btnLimpar.style.display = 'none';
+        servicesSection.style.display = 'none';
+        atualizarResumo();
+        return;
+      } else {
+        btnLimpar.style.display = '';
+        servicesSection.style.display = '';
+      }
+
+      carrinho.forEach((item, index) => {
+        total += item.preco;
+        const div = document.createElement('div');
+        div.className = 'product-item';
+        div.innerHTML = `
+          <img src="${item.imagem || 'https://via.placeholder.com/100x100?text=Produto'}" alt="Produto" class="product-image">
+          <div class="product-details">
+            <span style="font-size:0.96em;color:#888">${item.marca || ''}</span>
+            <div class="product-title">${item.nome}</div>
+            <span style="font-size:0.95em;color:#666">
+              Com desconto no PIX: <b>${formatarReal(item.preco * 0.93)}</b><br>
+              Parcelado no cartão sem juros: <b>${formatarReal(item.preco)}</b>
+            </span>
+            <button class="remove-btn" onclick="removerItem(${index})">REMOVER</button>
+          </div>
+          <div style="text-align:center; min-width:120px;">
+            <div style="font-size:0.95em;color:#888;">Quant.</div>
+            <div style="font-size:1.3em;font-weight:bold;">1</div>
+            <div style="font-size:0.95em;color:#888;">Preço à vista no PIX:</div>
+            <div style="font-size:1.15em;color:#FF6600;font-weight:bold;">${formatarReal(item.preco * 0.93)}</div>
+          </div>
+        `;
+        lista.appendChild(div);
+      });
+      atualizarResumo();
+    }
+
+    function removerItem(index) {
+      carrinho.splice(index, 1);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      renderCarrinho();
+    }
+
+    btnLimpar.onclick = function() {
+      localStorage.removeItem('carrinho');
+      window.location.reload();
+    }
+
+    function formatarReal(valor) {
+      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function atualizarResumo() {
+      // Totais
+      document.getElementById('valorProdutos').textContent = formatarReal(total);
+      document.getElementById('totalPrazo').textContent = formatarReal(total);
+      document.getElementById('parcelasRow').innerHTML = `(em até <b>10x</b> de <b>${formatarReal(total/10)}</b> sem juros)`;
+
+      // PIX: 7% de desconto
+      if (total > 0) {
+        let totalPix = total * 0.93;
+        let economize = total - totalPix;
+        document.getElementById('pixBox').style.display = '';
+        document.getElementById('valorPix').textContent = formatarReal(totalPix);
+        document.getElementById('economize').innerHTML = `(Economize: ${formatarReal(economize)})`;
+      } else {
+        document.getElementById('pixBox').style.display = 'none';
+      }
+    }
+
+    // Exibe carrinho ao carregar
+    renderCarrinho();
+
+    // Torna a função global para onclick do botão remover
+    window.removerItem = removerItem;
   </script>
 </body>
 </html>
