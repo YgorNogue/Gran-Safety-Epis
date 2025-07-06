@@ -130,3 +130,17 @@ footer {
   display: block;
   object-fit: cover;
 }
+
+.btn-carrinho {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.btn-carrinho:hover {
+  background-color: #0056b3;
+}
+
