@@ -8,18 +8,17 @@ body {
 header {
   background-color: #112557;
   color: white;
-  padding: 10px 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  min-height: 48px;
 }
 
 header img {
-  height: 100px;
+  max-height: 48px;
   width: auto;
-  margin-right: 20px;
-  object-fit: contain;
 }
-
 
 header div {
   display: flex;
@@ -157,7 +156,7 @@ footer {
   position: relative;
   color: white;
   text-decoration: none;
-  margin-left: 20px;
+  margin-left: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -173,7 +172,7 @@ footer {
   position: absolute;
   top: -6px;
   right: -10px;
-  background-color: orange;
+  background: orange;
   color: black;
   border-radius: 50%;
   padding: 2px 6px;
