@@ -187,7 +187,7 @@
     function toggleCarrinhoPreview() {
       const conteudo = document.getElementById('carrinho-conteudo');
       const seta = document.getElementById('setaToggle');
-      if (conteudo.style.display === 'none') {
+      if (conteudo.style.display === 'none' || conteudo.style.display === '') {
         conteudo.style.display = 'block';
         seta.textContent = '▼';
       } else {
@@ -197,91 +197,84 @@
     }
 
     function atualizarPreview(carrinho) {
-  const lista = document.getElementById('preview-list');
-  lista.innerHTML = '';
-  if (carrinho.length === 0) {
-    lista.innerHTML = '<li style="color:#666;font-style:italic">Carrinho vazio.</li>';
-    return;
-  }
-  let total = 0;
-  carrinho.forEach((item, index) => {
-    total += item.total;
-    lista.innerHTML += `<li>
-      <b>${item.nome}</b> x${item.qtd}<br>
-      <small>R$${item.total.toFixed(2).replace('.', ',')}</small>
-      <button onclick="removerItemCarrinho(${index})" style="float:right;color:red;background:none;border:none;font-size:1em;cursor:pointer">&times;</button>
-    </li>`;
-  });
-  lista.innerHTML += `<li style="text-align:right;font-weight:bold;margin-top:6px;">Total: R$${total.toFixed(2).replace('.', ',')}</li>`;
-}
-      
+      const lista = document.getElementById('preview-list');
+      lista.innerHTML = '';
+      if (carrinho.length === 0) {
+        lista.innerHTML = '<li style="color:#666;font-style:italic">Carrinho vazio.</li>';
+        return;
+      }
+      let total = 0;
+      carrinho.forEach((item, index) => {
+        total += item.total;
+        lista.innerHTML += `<li>
+          <b>${item.nome}</b> x${item.qtd}<br>
+          <small>R$${item.total.toFixed(2).replace('.', ',')}</small>
+          <button onclick="removerItemCarrinho(${index})" style="float:right;color:red;background:none;border:none;font-size:1em;cursor:pointer">&times;</button>
+        </li>`;
+      });
+      lista.innerHTML += `<li style="text-align:right;font-weight:bold;margin-top:6px;">Total: R$${total.toFixed(2).replace('.', ',')}</li>`;
     }
 
-    
+    function removerItemCarrinho(index) {
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
+      carrinho.splice(index, 1);
+      localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
+      atualizarBadge();
+    }
+
+    function updateTotal(input) {
+      const card = input.closest('.card');
+      const precoUnit = parseFloat(card.dataset.preco.replace(",", "."));
+      let qtd = parseInt(input.value);
+      if (isNaN(qtd) || qtd < 1) qtd = 1;
+      const total = precoUnit * qtd;
+      card.querySelector('[data-total]').textContent = "R$" + total.toFixed(2).replace('.', ',');
+    }
+
+    function changeQty(btn, delta) {
+      const input = btn.parentElement.querySelector('.quantity-input');
+      let val = parseInt(input.value);
+      if (isNaN(val)) val = 1;
+      val += delta;
+      if (val < 1) val = 1;
+      input.value = val;
+      updateTotal(input);
+    }
+
+    function addToCart(btn) {
+      const card = btn.closest('.card');
+      const nome = card.dataset.nome;
+      const precoUnit = parseFloat(card.dataset.preco.replace(",", "."));
+      const input = card.querySelector('.quantity-input');
+      let qtd = parseInt(input.value);
+      if (isNaN(qtd) || qtd < 1) qtd = 1;
+      const total = precoUnit * qtd;
+
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
+      let found = carrinho.find(item => item.nome === nome);
+      if (found) {
+        found.qtd += qtd;
+        found.total = found.qtd * precoUnit;
+      } else {
+        carrinho.push({ nome, qtd, precoUnit, total });
+      }
+
+      localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
+      atualizarBadge();
+    }
+
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('header').innerHTML = data);
+
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer').innerHTML = data);
+
+    window.addEventListener('load', () => {
+      atualizarBadge();
+      document.querySelectorAll('.quantity-input').forEach(updateTotal);
+    });
   </script>
-<script>
-  function removerItemCarrinho(index) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
-    carrinho.splice(index, 1);
-    localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
-    atualizarBadge();
-  }
-</script>
-<script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(data => document.getElementById('header').innerHTML = data);
-
-  fetch('footer.html')
-    .then(res => res.text())
-    .then(data => document.getElementById('footer').innerHTML = data);
-</script>
-<script>
-  function updateTotal(input) {
-    const card = input.closest('.card');
-    const precoUnit = parseFloat(card.dataset.preco.replace(",", "."));
-    let qtd = parseInt(input.value);
-    if (isNaN(qtd) || qtd < 1) qtd = 1;
-    const total = precoUnit * qtd;
-    card.querySelector('[data-total]').textContent = "R$" + total.toFixed(2).replace('.', ',');
-  }
-
-  function changeQty(btn, delta) {
-    const input = btn.parentElement.querySelector('.quantity-input');
-    let val = parseInt(input.value);
-    if (isNaN(val)) val = 1;
-    val += delta;
-    if (val < 1) val = 1;
-    input.value = val;
-    updateTotal(input);
-  }
-
-  function addToCart(btn) {
-    const card = btn.closest('.card');
-    const nome = card.dataset.nome;
-    const precoUnit = parseFloat(card.dataset.preco.replace(",", "."));
-    const input = card.querySelector('.quantity-input');
-    let qtd = parseInt(input.value);
-    if (isNaN(qtd) || qtd < 1) qtd = 1;
-    const total = precoUnit * qtd;
-
-    let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
-    let found = carrinho.find(item => item.nome === nome);
-    if (found) {
-      found.qtd += qtd;
-      found.total = found.qtd * precoUnit;
-    } else {
-      carrinho.push({ nome, qtd, precoUnit, total });
-    }
-
-    localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
-    atualizarBadge();
-  }
-
-  window.addEventListener('load', () => {
-  atualizarBadge();
-  document.querySelectorAll('.quantity-input').forEach(updateTotal);
-});
-</script>
 </body>
 </html>
