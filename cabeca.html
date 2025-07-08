@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Proteção para Cabeça | Gran Safety EPIs</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .quantity-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 22px;
+      background: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .quantity-btn:hover {
+      background: #ddd;
+    }
+    .quantity-input {
+      width: 48px;
+      height: 32px;
+      text-align: center;
+      font-size: 18px;
+      margin: 0 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,31 +49,61 @@
       <div class="card">
         <img src="https://via.placeholder.com/200x150?text=Capacete" alt="Capacete de Segurança">
         <p>Capacete de Segurança</p>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
         <span class="price">R$87,50</span>
       </div>
       <div class="card">
         <img src="https://via.placeholder.com/200x150?text=Balaclava" alt="Balaclava Térmica">
         <p>Balaclava Térmica</p>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
         <span class="price">R$54,20</span>
       </div>
       <div class="card">
         <img src="https://via.placeholder.com/200x150?text=Protetor+Facial" alt="Protetor Facial">
         <p>Protetor Facial</p>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
         <span class="price">R$62,80</span>
       </div>
       <div class="card">
         <img src="https://via.placeholder.com/200x150?text=Abafador+de+Ruído" alt="Abafador de Ruído">
         <p>Abafador de Ruído</p>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
         <span class="price">R$75,30</span>
       </div>
       <div class="card">
         <img src="https://via.placeholder.com/200x150?text=Touca+Descartável" alt="Touca Descartável">
         <p>Touca Descartável</p>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
         <span class="price">R$18,90</span>
       </div>
       <div class="card">
         <img src="https://via.placeholder.com/200x150?text=Protetor+Auricular" alt="Protetor Auricular">
         <p>Protetor Auricular</p>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
         <span class="price">R$12,40</span>
       </div>
     </div>
@@ -56,6 +119,15 @@
     fetch('footer.html')
       .then(res => res.text())
       .then(data => document.getElementById('footer').innerHTML = data);
+
+    function changeQty(btn, delta) {
+      const input = btn.parentElement.querySelector('.quantity-input');
+      let val = parseInt(input.value);
+      if (isNaN(val)) val = 1;
+      val += delta;
+      if(val < 1) val = 1;
+      input.value = val;
+    }
   </script>
 </body>
 </html>
