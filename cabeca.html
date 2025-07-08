@@ -217,7 +217,7 @@
       
     }
 
-    window.addEventListener('load', atualizarBadge);
+    
   </script>
 <script>
   function removerItemCarrinho(index) {
@@ -279,8 +279,9 @@
   }
 
   window.addEventListener('load', () => {
-    document.querySelectorAll('.quantity-input').forEach(updateTotal);
-  });
+  atualizarBadge();
+  document.querySelectorAll('.quantity-input').forEach(updateTotal);
+});
 </script>
 </body>
 </html>
