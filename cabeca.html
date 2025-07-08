@@ -197,12 +197,23 @@
     }
 
     function atualizarPreview(carrinho) {
-      const lista = document.getElementById('preview-list');
-      lista.innerHTML = '';
-      if (carrinho.length === 0) {
-        lista.innerHTML = '<li style="color:#666;font-style:italic">Carrinho vazio.</li>';
-        return;
-      }
+  const lista = document.getElementById('preview-list');
+  lista.innerHTML = '';
+  if (carrinho.length === 0) {
+    lista.innerHTML = '<li style="color:#666;font-style:italic">Carrinho vazio.</li>';
+    return;
+  }
+  let total = 0;
+  carrinho.forEach((item, index) => {
+    total += item.total;
+    lista.innerHTML += `<li>
+      <b>${item.nome}</b> x${item.qtd}<br>
+      <small>R$${item.total.toFixed(2).replace('.', ',')}</small>
+      <button onclick="removerItemCarrinho(${index})" style="float:right;color:red;background:none;border:none;font-size:1em;cursor:pointer">&times;</button>
+    </li>`;
+  });
+  lista.innerHTML += `<li style="text-align:right;font-weight:bold;margin-top:6px;">Total: R$${total.toFixed(2).replace('.', ',')}</li>`;
+}
       carrinho.forEach(item => {
         lista.innerHTML += `<li><b>${item.nome}</b> x${item.qtd}</li>`;
       });
@@ -210,6 +221,14 @@
 
     window.addEventListener('load', atualizarBadge);
   </script>
+<script>
+  function removerItemCarrinho(index) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
+    carrinho.splice(index, 1);
+    localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
+    atualizarBadge();
+  }
+</script>
 <script>
   fetch('header.html')
     .then(res => res.text())
