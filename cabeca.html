@@ -214,9 +214,7 @@
   });
   lista.innerHTML += `<li style="text-align:right;font-weight:bold;margin-top:6px;">Total: R$${total.toFixed(2).replace('.', ',')}</li>`;
 }
-      carrinho.forEach(item => {
-        lista.innerHTML += `<li><b>${item.nome}</b> x${item.qtd}</li>`;
-      });
+      
     }
 
     window.addEventListener('load', atualizarBadge);
