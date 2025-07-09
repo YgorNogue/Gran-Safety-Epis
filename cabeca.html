@@ -120,8 +120,68 @@
   </style>
 </head>
 <body>
-  <!-- Conteúdo do corpo permanece o mesmo -->
+  <div id="header"></div>
+  <section class="section">
+    <h2>Proteção para Cabeça</h2>
+    <div class="produtos" id="produtos"></div>
+  </section>
+  <div id="footer"></div>
+  <div id="carrinho-flutuante">
+    <div id="carrinho-toggle" onclick="toggleCarrinhoPreview()">
+      🛒 Carrinho (<span id="badgeCarrinho">0</span>) <span id="setaToggle">▲</span>
+    </div>
+    <div id="carrinho-conteudo">
+      <ul id="preview-list">
+        <li style="color:#666;font-style:italic">Carrinho vazio.</li>
+      </ul>
+      <button onclick="window.location.href='checkout.html'" style="margin-top:8px;width:100%;padding:6px 0;background:#2ecc40;color:#fff;border:none;border-radius:4px;cursor:pointer;">Finalizar</button>
+    </div>
+  </div>
   <script>
+    const produtosData = [
+      { nome: 'Capacete de Segurança', preco: 87.50, imagem: 'https://via.placeholder.com/200x150?text=Capacete' },
+      { nome: 'Balaclava Térmica', preco: 54.20, imagem: 'https://via.placeholder.com/200x150?text=Balaclava' },
+      { nome: 'Protetor Facial', preco: 62.80, imagem: 'https://via.placeholder.com/200x150?text=Protetor+Facial' }
+    ];
+
+    const produtosContainer = document.getElementById('produtos');
+    produtosData.forEach(prod => {
+      const totalInicial = prod.preco.toFixed(2).replace('.', ',');
+      produtosContainer.innerHTML += `
+        <div class="card" data-nome="${prod.nome}" data-preco="${prod.preco}">
+          <img src="${prod.imagem}" alt="${prod.nome}">
+          <p>${prod.nome}</p>
+          <span class="price">R$${totalInicial}</span>
+          <span class="total-price">R$${totalInicial}</span>
+          <div class="quantity-control">
+            <button class="quantity-btn" onclick="changeQty(this, -1)">-</button>
+            <input type="number" class="quantity-input" value="1" min="1" oninput="updateTotal(this)">
+            <button class="quantity-btn" onclick="changeQty(this, 1)">+</button>
+          </div>
+          <button class="add-cart-btn" onclick="addToCart(this)">Adicionar ao Carrinho</button>
+        </div>
+      `;
+    });
+
+    function atualizarPreview(carrinho) {
+      const lista = document.getElementById('preview-list');
+      lista.innerHTML = '';
+      if (carrinho.length === 0) {
+        lista.innerHTML = '<li style="color:#666;font-style:italic">Carrinho vazio.</li>';
+        return;
+      }
+      let total = 0;
+      carrinho.forEach((item, index) => {
+        total += item.total;
+        lista.innerHTML += `<li>
+          <b>${item.nome}</b> x${item.qtd}<br>
+          <small>R$${item.total.toFixed(2).replace('.', ',')}</small>
+          <button onclick="removerItemCarrinho(${index})" style="float:right;color:red;background:none;border:none;font-size:1em;cursor:pointer">&times;</button>
+        </li>`;
+      });
+      lista.innerHTML += `<li style="text-align:right;font-weight:bold;margin-top:6px;">Total: R$${total.toFixed(2).replace('.', ',')}</li>`;
+    }
+
     function atualizarBadge() {
       const carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
       const badge = document.getElementById('badgeCarrinho');
@@ -129,6 +189,68 @@
       if (badge) badge.textContent = totalQtd > 0 ? totalQtd : '0';
       atualizarPreview(carrinho);
     }
+
+    function toggleCarrinhoPreview() {
+      const conteudo = document.getElementById('carrinho-conteudo');
+      const seta = document.getElementById('setaToggle');
+      if (conteudo.style.display === 'none') {
+        conteudo.style.display = 'block';
+        seta.textContent = '▼';
+      } else {
+        conteudo.style.display = 'none';
+        seta.textContent = '▲';
+      }
+    }
+
+    function removerItemCarrinho(index) {
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
+      carrinho.splice(index, 1);
+      localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
+      atualizarBadge();
+    }
+
+    function updateTotal(input) {
+      const card = input.closest('.card');
+      const precoUnit = parseFloat(card.dataset.preco);
+      let qtd = parseInt(input.value);
+      if (isNaN(qtd) || qtd < 1) qtd = 1;
+      const total = precoUnit * qtd;
+      card.querySelector('.total-price').textContent = 'R$' + total.toFixed(2).replace('.', ',');
+    }
+
+    function changeQty(btn, delta) {
+      const input = btn.parentElement.querySelector('.quantity-input');
+      let val = parseInt(input.value);
+      if (isNaN(val)) val = 1;
+      val += delta;
+      if (val < 1) val = 1;
+      input.value = val;
+      updateTotal(input);
+    }
+
+    function addToCart(btn) {
+      const card = btn.closest('.card');
+      const nome = card.dataset.nome;
+      const precoUnit = parseFloat(card.dataset.preco);
+      const input = card.querySelector('.quantity-input');
+      let qtd = parseInt(input.value);
+      if (isNaN(qtd) || qtd < 1) qtd = 1;
+      const total = precoUnit * qtd;
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
+      let found = carrinho.find(item => item.nome === nome);
+      if (found) {
+        found.qtd += qtd;
+        found.total = found.qtd * precoUnit;
+      } else {
+        carrinho.push({ nome, qtd, precoUnit, total });
+      }
+      localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
+      atualizarBadge();
+    }
+
+    window.addEventListener('load', () => {
+      atualizarBadge();
+    });
   </script>
 </body>
 </html>
