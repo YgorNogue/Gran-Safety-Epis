@@ -138,6 +138,14 @@
     </div>
   </div>
   <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('header').innerHTML = data);
+
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer').innerHTML = data);
+
     const produtosData = [
       { nome: 'Capacete de Segurança', preco: 87.50, imagem: 'https://via.placeholder.com/200x150?text=Capacete' },
       { nome: 'Balaclava Térmica', preco: 54.20, imagem: 'https://via.placeholder.com/200x150?text=Balaclava' },
