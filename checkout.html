@@ -63,85 +63,28 @@
       font-size: 1.1em;
       margin: 5px 0;
     }
-    .remove-btn {
+    .remove-btn, .qty-btn {
       background: #fff;
       border: 1px solid #E53935;
       color: #E53935;
-      padding: 8px 18px;
+      padding: 6px 12px;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 12px;
+      margin-right: 6px;
       transition: all 0.15s;
     }
-    .remove-btn:hover {
+    .remove-btn:hover, .qty-btn:hover {
       background: #E53935;
       color: #fff;
     }
-    .services-section {
-      margin-top: 32px;
-      background: #fafafa;
-      padding: 20px 24px;
-      border-radius: 8px;
+    .qty-btn {
+      border: 1px solid #888;
+      color: #444;
     }
-    .services-title {
-      font-size: 1.1em;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .service-options {
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
-    .service-options label {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      gap: 8px;
-    }
-    .service-options input[type="radio"] {
-      accent-color: #FF6600;
-    }
-    .resume-title {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .summary-section .row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      font-size: 1em;
-    }
-    .summary-section .highlight {
-      background: #E7FFF0;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: #007D3A;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .summary-section button {
-      width: 100%;
-      padding: 14px 0;
-      border-radius: 6px;
-      font-size: 1.1em;
-      font-weight: bold;
-      margin-top: 16px;
-      cursor: pointer;
-      border: none;
-      transition: background 0.15s, color 0.15s;
+    .qty-btn:hover {
+      background: #eee;
+      color: #000;
     }
     .continue-btn {
       background: #112557;
@@ -151,83 +94,23 @@
     .continue-btn:hover {
       filter: brightness(0.9);
     }
-    .back-btn {
-      background: #fff;
-      color: #111;
-      border: 2px solid #111;
-    }
-    .back-btn:hover {
-      background: #eee;
-    }
-    .remove-all-btn {
-      float: right;
-      background: #fff;
-      border: 1px solid #E53935;
-      color: #E53935;
-      font-weight: bold;
-      border-radius: 6px;
-      padding: 8px 18px;
-      cursor: pointer;
-      margin-top: -10px;
-      margin-bottom: 20px;
-      transition: all 0.15s;
-    }
-    .remove-all-btn:hover {
-      background: #E53935;
-      color: #fff;
-    }
-    .empty-cart {
-      color: #888;
-      font-size: 1.15em;
-      text-align: center;
-      margin: 48px 0;
-    }
-    @media (max-width: 900px) {
-      .checkout-container { flex-direction: column; }
+    .continue-btn:active {
+      transform: scale(0.97);
     }
   </style>
 </head>
 <body>
   <div id="header"></div>
-
   <div class="checkout-container">
-    <!-- Main Section -->
     <div class="main-section">
       <div class="section-title">
-        <span>🛒</span> PRODUTO E SERVIÇO
+        🛒 PRODUTO E SERVIÇO
         <button class="remove-all-btn" id="btn-limpar">REMOVER TODOS OS PRODUTOS</button>
       </div>
       <div id="produtos-lista"></div>
-      <div class="services-section" id="services-section" style="display:none;">
-        <div class="services-title">
-          <span>🛡️</span> SERVIÇOS
-        </div>
-        <div style="font-weight:bold; margin-bottom:8px;">GARANTIA ESTENDIDA ORIGINAL AMPLIADA</div>
-        <div class="service-options">
-          <label>
-            <input type="radio" name="garantia" checked> Sem garantia
-          </label>
-          <label>
-            <input type="radio" name="garantia"> 12 Meses de Garantia Estendida
-            <span title="Informação" style="color:#FF6600; cursor:pointer;">&#9432;</span>
-            <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros</span>
-          </label>
-          <label>
-            <input type="radio" name="garantia"> 24 Meses de Garantia Estendida
-            <span title="Informação" style="color:#FF6600; cursor:pointer;">&#9432;</span>
-            <span style="margin-left:auto; font-size:0.95em;">Até 10x sem juros</span>
-          </label>
-        </div>
-        <div style="font-size:0.95em;color:#888; margin-top:6px;">
-          Ao adicionar a <b>Garantia Estendida Original Ampliada</b>, declaro que tive acesso, li e aceito as 
-          <a href="#" style="color:#FF6600;">Condições gerais</a>
-        </div>
-        <div style="margin-top:10px;font-weight:bold;">Subtotal serviços: R$ 0,00</div>
-      </div>
     </div>
-    <!-- Summary Section -->
     <div class="summary-section">
-      <div class="resume-title"><span>📄</span> RESUMO</div>
+      <div class="resume-title">📄 RESUMO</div>
       <div class="row">
         <span>Valor dos Produtos:</span>
         <span id="valorProdutos">R$ 0,00</span>
@@ -236,37 +119,24 @@
         <span>Total a prazo:</span>
         <span id="totalPrazo">R$ 0,00</span>
       </div>
-      <div style="color:#888; font-size:0.95em; margin-bottom:12px;" id="parcelasRow">
-        (em até <b>10x</b> de <b>R$ 0,00</b> sem juros)
-      </div>
+      <div style="color:#888; font-size:0.95em; margin-bottom:12px;" id="parcelasRow"></div>
       <div class="highlight" id="pixBox" style="display:none;">
         Valor à vista no <span style="color:#00821E;"><b>PIX:</b></span>
         <span style="font-size:1.1em;" id="valorPix">R$ 0,00</span>
-        <span style="font-size:0.9em; color:#00821E;" id="economize">(Economize: R$ 0,00)</span>
+        <span style="font-size:0.9em; color:#00821E;" id="economize"></span>
       </div>
-      <button class="continue-btn">CONTINUAR</button>
+      <button class="continue-btn" onclick="finalizarCompra()">FINALIZAR COMPRA</button>
       <button class="back-btn" onclick="window.location='index.html'">VOLTAR</button>
     </div>
   </div>
-
   <div id="footer"></div>
-
   <script>
-    // Header e footer dinâmicos
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('header').innerHTML = data);
+    fetch('header.html').then(res => res.text()).then(data => document.getElementById('header').innerHTML = data);
+    fetch('footer.html').then(res => res.text()).then(data => document.getElementById('footer').innerHTML = data);
 
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('footer').innerHTML = data);
-
-    // Exemplo: o carrinho deve ser um array de objetos { nome, preco, imagem (opcional) }
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const carrinho = JSON.parse(localStorage.getItem('carrinhoGranSafety')) || [];
     const lista = document.getElementById('produtos-lista');
     const btnLimpar = document.getElementById('btn-limpar');
-    const servicesSection = document.getElementById('services-section');
-
     let total = 0;
 
     function renderCarrinho() {
@@ -276,79 +146,81 @@
       if (carrinho.length === 0) {
         lista.innerHTML = `<div class="empty-cart">Seu carrinho está vazio.</div>`;
         btnLimpar.style.display = 'none';
-        servicesSection.style.display = 'none';
         atualizarResumo();
         return;
       } else {
         btnLimpar.style.display = '';
-        servicesSection.style.display = '';
       }
 
       carrinho.forEach((item, index) => {
-        total += item.preco;
+        total += item.total;
         const div = document.createElement('div');
         div.className = 'product-item';
         div.innerHTML = `
-          <img src="${item.imagem || 'https://via.placeholder.com/100x100?text=Produto'}" alt="Produto" class="product-image">
+          <img src="${item.imagem || 'https://via.placeholder.com/100'}" class="product-image">
           <div class="product-details">
-            <span style="font-size:0.96em;color:#888">${item.marca || ''}</span>
             <div class="product-title">${item.nome}</div>
-            <span style="font-size:0.95em;color:#666">
-              Com desconto no PIX: <b>${formatarReal(item.preco * 0.93)}</b><br>
-              Parcelado no cartão sem juros: <b>${formatarReal(item.preco)}</b>
-            </span>
+            <div>Preço unitário: R$ ${item.precoUnit.toFixed(2).replace('.', ',')}</div>
+            <div>Total: R$ ${item.total.toFixed(2).replace('.', ',')}</div>
+            <div style="margin-top: 6px;">
+              <button class="qty-btn" onclick="alterarQtd(${index}, -1)">−</button>
+              <span style="margin: 0 8px;">${item.qtd}</span>
+              <button class="qty-btn" onclick="alterarQtd(${index}, 1)">+</button>
+            </div>
             <button class="remove-btn" onclick="removerItem(${index})">REMOVER</button>
-          </div>
-          <div style="text-align:center; min-width:120px;">
-            <div style="font-size:0.95em;color:#888;">Quant.</div>
-            <div style="font-size:1.3em;font-weight:bold;">1</div>
-            <div style="font-size:0.95em;color:#888;">Preço à vista no PIX:</div>
-            <div style="font-size:1.15em;color:#FF6600;font-weight:bold;">${formatarReal(item.preco * 0.93)}</div>
           </div>
         `;
         lista.appendChild(div);
       });
+
       atualizarResumo();
+    }
+
+    function alterarQtd(index, delta) {
+      carrinho[index].qtd += delta;
+      if (carrinho[index].qtd <= 0) carrinho.splice(index, 1);
+      else carrinho[index].total = carrinho[index].qtd * carrinho[index].precoUnit;
+      localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
+      renderCarrinho();
     }
 
     function removerItem(index) {
       carrinho.splice(index, 1);
-      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      localStorage.setItem('carrinhoGranSafety', JSON.stringify(carrinho));
       renderCarrinho();
     }
 
-    btnLimpar.onclick = function() {
-      localStorage.removeItem('carrinho');
-      window.location.reload();
-    }
-
-    function formatarReal(valor) {
-      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
-
     function atualizarResumo() {
-      // Totais
-      document.getElementById('valorProdutos').textContent = formatarReal(total);
-      document.getElementById('totalPrazo').textContent = formatarReal(total);
-      document.getElementById('parcelasRow').innerHTML = `(em até <b>10x</b> de <b>${formatarReal(total/10)}</b> sem juros)`;
-
-      // PIX: 7% de desconto
+      document.getElementById('valorProdutos').textContent = formatar(total);
+      document.getElementById('totalPrazo').textContent = formatar(total);
+      document.getElementById('parcelasRow').innerHTML = `(em até <b>10x</b> de <b>${formatar(total/10)}</b> sem juros)`;
       if (total > 0) {
         let totalPix = total * 0.93;
-        let economize = total - totalPix;
+        let economia = total - totalPix;
         document.getElementById('pixBox').style.display = '';
-        document.getElementById('valorPix').textContent = formatarReal(totalPix);
-        document.getElementById('economize').innerHTML = `(Economize: ${formatarReal(economize)})`;
+        document.getElementById('valorPix').textContent = formatar(totalPix);
+        document.getElementById('economize').textContent = `(Economize: ${formatar(economia)})`;
       } else {
         document.getElementById('pixBox').style.display = 'none';
       }
     }
 
-    // Exibe carrinho ao carregar
-    renderCarrinho();
+    function formatar(valor) {
+      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
 
-    // Torna a função global para onclick do botão remover
-    window.removerItem = removerItem;
+    btnLimpar.onclick = function () {
+      localStorage.removeItem('carrinhoGranSafety');
+      location.reload();
+    };
+
+    function finalizarCompra() {
+      alert("Compra finalizada! Em breve entraremos em contato.");
+      localStorage.removeItem('carrinhoGranSafety');
+      location.href = "index.html";
+    }
+
+    renderCarrinho();
   </script>
 </body>
 </html>
